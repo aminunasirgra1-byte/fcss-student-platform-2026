@@ -1,0 +1,3222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCSS Student Platform</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --primary:#126b45;
+    --primary2:#0d5135;
+    --accent:#f0b429;
+    --bg:#f4f7f6;
+    --card:#ffffff;
+    --text:#17221d;
+    --muted:#6d7b74;
+    --border:#e2e9e5;
+    --danger:#d83a3a;
+    --success:#159957;
+    --shadow:0 8px 25px rgba(0,0,0,.07);
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+body.dark{
+    --bg:#101815;
+    --card:#17221e;
+    --text:#eef7f2;
+    --muted:#aab9b1;
+    --border:#2a3932;
+    --shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+/* LOGIN */
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at top right,rgba(240,180,41,.25),transparent 30%),
+        linear-gradient(135deg,#0d5135,#126b45);
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    background:white;
+    border-radius:24px;
+    padding:35px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.logo{
+    width:75px;
+    height:75px;
+    border-radius:20px;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:bold;
+    margin:auto;
+}
+
+.login-box h1{
+    text-align:center;
+    margin-top:18px;
+    color:#126b45;
+}
+
+.login-box p{
+    text-align:center;
+    color:#777;
+    margin:8px 0 25px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #d8e1dc;
+    border-radius:10px;
+    outline:none;
+    background:white;
+    color:#222;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:var(--primary);
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--primary2);
+}
+
+.btn-warning{
+    background:var(--accent);
+    color:#1d1d1d;
+}
+
+.btn-danger{
+    background:var(--danger);
+    color:white;
+}
+
+.btn-light{
+    background:#eef3f0;
+    color:#183027;
+}
+
+.demo{
+    margin-top:20px;
+    background:#f2f7f4;
+    padding:14px;
+    border-radius:12px;
+    font-size:13px;
+}
+
+/* APP */
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+.layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:250px;
+    background:var(--primary2);
+    color:white;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    overflow-y:auto;
+    z-index:1000;
+}
+
+.sidebar-header{
+    padding:25px 20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.sidebar-logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.sidebar-logo .mini-logo{
+    width:45px;
+    height:45px;
+    background:var(--accent);
+    color:#222;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.sidebar-header h2{
+    font-size:18px;
+}
+
+.sidebar-header small{
+    opacity:.7;
+}
+
+.nav{
+    padding:15px 10px;
+}
+
+.nav-title{
+    font-size:11px;
+    opacity:.55;
+    padding:12px;
+    text-transform:uppercase;
+}
+
+.nav button{
+    width:100%;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:12px;
+    margin:3px 0;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    text-align:left;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:rgba(255,255,255,.13);
+}
+
+.nav-icon{
+    width:25px;
+    text-align:center;
+}
+
+/* MAIN */
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+}
+
+.topbar{
+    height:72px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:transparent;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:10px;
+    background:var(--bg);
+    cursor:pointer;
+    font-size:18px;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-left:8px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.content{
+    padding:25px;
+    max-width:1500px;
+    margin:auto;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* DASHBOARD */
+.welcome{
+    background:linear-gradient(135deg,var(--primary),#198f5b);
+    color:white;
+    padding:28px;
+    border-radius:20px;
+    margin-bottom:22px;
+    position:relative;
+    overflow:hidden;
+}
+
+.welcome:after{
+    content:"";
+    width:200px;
+    height:200px;
+    border:30px solid rgba(255,255,255,.08);
+    border-radius:50%;
+    position:absolute;
+    right:-60px;
+    top:-80px;
+}
+
+.welcome h1{
+    margin-bottom:8px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:22px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#eaf5ef;
+    color:var(--primary);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+.stat h2{
+    margin-bottom:5px;
+}
+
+.stat p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    gap:10px;
+}
+
+.card-header h3{
+    font-size:18px;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.quick{
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.quick:hover{
+    border-color:var(--primary);
+}
+
+.quick strong{
+    display:block;
+    margin-top:8px;
+}
+
+.quick small{
+    color:var(--muted);
+}
+
+/* TABLE */
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:13px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    white-space:nowrap;
+}
+
+th{
+    font-size:13px;
+    color:var(--muted);
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.badge.green{
+    background:#dcf7e9;
+    color:#137642;
+}
+
+.badge.yellow{
+    background:#fff2cc;
+    color:#876200;
+}
+
+.badge.red{
+    background:#ffe1e1;
+    color:#a62222;
+}
+
+.badge.blue{
+    background:#dcecff;
+    color:#245c98;
+}
+
+/* SUBJECTS */
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.subject{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.subject-top{
+    height:90px;
+    background:linear-gradient(135deg,var(--primary),#31a76d);
+    padding:20px;
+    color:white;
+    font-size:30px;
+}
+
+.subject-body{
+    padding:18px;
+}
+
+.subject-body h3{
+    margin-bottom:8px;
+}
+
+.topic-list{
+    list-style:none;
+    margin-top:14px;
+}
+
+.topic-list li{
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+    cursor:pointer;
+}
+
+.topic-list li:hover{
+    color:var(--primary);
+}
+
+/* TOPIC */
+.topic-box{
+    background:var(--card);
+    padding:25px;
+    border-radius:16px;
+    border:1px solid var(--border);
+}
+
+.topic-box h2{
+    margin-bottom:10px;
+}
+
+.topic-box h3{
+    margin:20px 0 10px;
+}
+
+.topic-box p,
+.topic-box li{
+    line-height:1.7;
+}
+
+.topic-box ul{
+    padding-left:20px;
+}
+
+.example{
+    margin-top:15px;
+    padding:16px;
+    border-left:4px solid var(--primary);
+    background:var(--bg);
+    border-radius:8px;
+}
+
+/* BOOKS */
+.book-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.book{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:18px;
+}
+
+.book-cover{
+    height:140px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#126b45,#42a875);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.book p{
+    font-size:13px;
+    color:var(--muted);
+    margin:7px 0 14px;
+}
+
+/* ASSIGNMENTS */
+.assignment{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:16px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:12px;
+}
+
+.assignment-info h4{
+    margin-bottom:6px;
+}
+
+.assignment-info p{
+    font-size:13px;
+    color:var(--muted);
+}
+
+/* PROGRESS */
+.progress{
+    height:9px;
+    background:#e7ece9;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:var(--primary);
+    border-radius:20px;
+}
+
+/* QUIZ */
+.quiz-question{
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.option{
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin:8px 0;
+    cursor:pointer;
+}
+
+.option:hover{
+    border-color:var(--primary);
+}
+
+.option.selected{
+    background:#e6f5ed;
+    border-color:var(--primary);
+}
+
+/* FORMS */
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.form-full{
+    grid-column:1/-1;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:2000;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:var(--card);
+    width:100%;
+    max-width:600px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:25px;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:var(--bg);
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#17221d;
+    color:white;
+    padding:14px 18px;
+    border-radius:10px;
+    display:none;
+    z-index:3000;
+}
+
+.toast.show{
+    display:block;
+}
+
+/* MOBILE */
+@media(max-width:1000px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .subject-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .book-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:750px){
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+    .subject-grid{
+        grid-template-columns:1fr;
+    }
+
+    .book-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .user-name{
+        display:none;
+    }
+}
+
+@media(max-width:480px){
+    .login-box{
+        padding:25px 18px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr;
+    }
+
+    .assignment{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+<section id="loginPage">
+
+<div class="login-box">
+
+    <div class="logo">FCSS</div>
+
+    <h1>FCSS Student Platform</h1>
+    <p>Student • Teacher • Admin Portal</p>
+
+    <form id="loginForm">
+
+        <div class="form-group">
+            <label>User ID</label>
+            <input id="loginId" placeholder="e.g. ST001" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter password" required>
+        </div>
+
+        <div class="form-group">
+            <label>Login As</label>
+            <select id="loginRole">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Administrator</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%">
+            Login to Platform
+        </button>
+
+    </form>
+
+    <div class="demo">
+        <b>Demo Login</b><br><br>
+        Student: ST001 / 1234<br>
+        Teacher: TC001 / 1234<br>
+        Admin: AD001 / 1234
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= APP ================= -->
+<div id="app">
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-header">
+
+        <div class="sidebar-logo">
+
+            <div class="mini-logo">FC</div>
+
+            <div>
+                <h2>FCSS Platform</h2>
+                <small id="roleText">Student Portal</small>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nav">
+
+        <div class="nav-title">Main</div>
+
+        <button class="active" data-page="dashboard">
+            <span class="nav-icon">🏠</span> Dashboard
+        </button>
+
+        <button data-page="subjects">
+            <span class="nav-icon">📚</span> Subjects & Topics
+        </button>
+
+        <button data-page="textbooks">
+            <span class="nav-icon">📖</span> Textbooks
+        </button>
+
+        <button data-page="assignments">
+            <span class="nav-icon">📝</span> Assignments
+        </button>
+
+        <button data-page="quiz">
+            <span class="nav-icon">🧠</span> Practice Quiz
+        </button>
+
+        <button data-page="results">
+            <span class="nav-icon">📊</span> Results & Progress
+        </button>
+
+        <div class="nav-title">School</div>
+
+        <button data-page="timetable">
+            <span class="nav-icon">🗓️</span> Timetable
+        </button>
+
+        <button data-page="attendance">
+            <span class="nav-icon">✅</span> Attendance
+        </button>
+
+        <button data-page="announcements">
+            <span class="nav-icon">📢</span> Announcements
+        </button>
+
+        <div id="teacherNav">
+
+            <div class="nav-title">Teacher</div>
+
+            <button data-page="teacher">
+                <span class="nav-icon">👨‍🏫</span> Teacher Dashboard
+            </button>
+
+            <button data-page="manageContent">
+                <span class="nav-icon">✏️</span> Manage Content
+            </button>
+
+        </div>
+
+        <div id="adminNav">
+
+            <div class="nav-title">Administration</div>
+
+            <button data-page="admin">
+                <span class="nav-icon">⚙️</span> Admin Dashboard
+            </button>
+
+            <button data-page="students">
+                <span class="nav-icon">👥</span> Students
+            </button>
+
+        </div>
+
+        <div class="nav-title">Account</div>
+
+        <button id="logoutBtn">
+            <span class="nav-icon">🚪</span> Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <header class="topbar">
+
+        <button class="menu-btn" id="menuBtn">☰</button>
+
+        <div>
+            <b id="pageTitle">Dashboard</b>
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-btn" id="themeBtn" title="Dark mode">
+                🌙
+            </button>
+
+            <button class="icon-btn" onclick="showPage('announcements')">
+                🔔
+            </button>
+
+            <div class="user">
+
+                <div class="avatar" id="avatar">S</div>
+
+                <div class="user-name">
+                    <b id="userName">Student</b><br>
+                    <small class="muted" id="userRole">Student</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="content">
+
+
+<!-- ================= DASHBOARD ================= -->
+<section class="page active" id="dashboard">
+
+    <div class="welcome">
+
+        <h1>Welcome back, <span id="welcomeName">Student</span> 👋</h1>
+
+        <p>
+            Continue your learning journey and keep improving your results.
+        </p>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">📚</div>
+            <h2>6</h2>
+            <p>Subjects</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📝</div>
+            <h2>8</h2>
+            <p>Assignments</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🎯</div>
+            <h2>78%</h2>
+            <p>Average Score</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📅</div>
+            <h2>94%</h2>
+            <p>Attendance</p>
+        </div>
+
+    </div>
+
+    <div class="grid2">
+
+        <div>
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3>Continue Learning</h3>
+                    <button class="btn btn-light" onclick="showPage('subjects')">
+                        View All
+                    </button>
+                </div>
+
+                <div class="subject-grid" style="grid-template-columns:1fr 1fr">
+
+                    <div class="subject">
+
+                        <div class="subject-top">➗</div>
+
+                        <div class="subject-body">
+
+                            <h3>Mathematics</h3>
+
+                            <p class="muted">Algebra & Equations</p>
+
+                            <div class="progress" style="margin-top:12px">
+                                <span style="width:72%"></span>
+                            </div>
+
+                            <small class="muted">72% completed</small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="subject">
+
+                        <div class="subject-top">⚛️</div>
+
+                        <div class="subject-body">
+
+                            <h3>Physics</h3>
+
+                            <p class="muted">Motion & Forces</p>
+
+                            <div class="progress" style="margin-top:12px">
+                                <span style="width:58%"></span>
+                            </div>
+
+                            <small class="muted">58% completed</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3>Recent Assignments</h3>
+                    <button class="btn btn-light" onclick="showPage('assignments')">
+                        All
+                    </button>
+                </div>
+
+                <div class="assignment">
+
+                    <div class="assignment-info">
+                        <h4>Mathematics Exercise</h4>
+                        <p>Algebra • Due Friday</p>
+                    </div>
+
+                    <span class="badge yellow">Pending</span>
+
+                </div>
+
+                <div class="assignment">
+
+                    <div class="assignment-info">
+                        <h4>Physics Assignment</h4>
+                        <p>Motion • Due Monday</p>
+                    </div>
+
+                    <span class="badge green">Submitted</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3>Quick Access</h3>
+                </div>
+
+                <div class="quick-grid">
+
+                    <div class="quick" onclick="showPage('subjects')">
+                        📚
+                        <strong>Subjects</strong>
+                        <small>Learn topics</small>
+                    </div>
+
+                    <div class="quick" onclick="showPage('textbooks')">
+                        📖
+                        <strong>Textbooks</strong>
+                        <small>Study materials</small>
+                    </div>
+
+                    <div class="quick" onclick="showPage('quiz')">
+                        🧠
+                        <strong>Practice</strong>
+                        <small>Test yourself</small>
+                    </div>
+
+                    <div class="quick" onclick="showPage('results')">
+                        📊
+                        <strong>Results</strong>
+                        <small>View progress</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3>Announcements</h3>
+                </div>
+
+                <p>
+                    📢 New revision materials have been added to the platform.
+                </p>
+
+                <hr style="border:0;border-top:1px solid var(--border);margin:15px 0">
+
+                <p>
+                    📅 Examination timetable will be updated soon.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SUBJECTS ================= -->
+<section class="page" id="subjects">
+
+    <div class="card-header">
+        <div>
+            <h2>Subjects & Topics</h2>
+            <p class="muted">Select a subject to explore topics and explanations.</p>
+        </div>
+    </div>
+
+    <div class="subject-grid" id="subjectContainer"></div>
+
+</section>
+
+
+<!-- ================= TOPIC ================= -->
+<section class="page" id="topic">
+
+    <button class="btn btn-light" onclick="showPage('subjects')" style="margin-bottom:15px">
+        ← Back to Subjects
+    </button>
+
+    <div class="topic-box" id="topicContent"></div>
+
+</section>
+
+
+<!-- ================= TEXTBOOKS ================= -->
+<section class="page" id="textbooks">
+
+    <div class="card-header">
+        <div>
+            <h2>Textbooks & Study Materials</h2>
+            <p class="muted">Your digital learning library.</p>
+        </div>
+
+        <button class="btn btn-primary" onclick="showToast('Book reader opened')">
+            📖 Open Library
+        </button>
+    </div>
+
+    <div class="book-grid" id="bookContainer"></div>
+
+</section>
+
+
+<!-- ================= ASSIGNMENTS ================= -->
+<section class="page" id="assignments">
+
+    <div class="card-header">
+        <div>
+            <h2>Assignments</h2>
+            <p class="muted">Complete your school assignments.</p>
+        </div>
+
+        <button class="btn btn-primary" onclick="showToast('Assignment submission area opened')">
+            + Submit Work
+        </button>
+    </div>
+
+    <div class="card">
+
+        <div class="assignment">
+
+            <div class="assignment-info">
+                <h4>Mathematics — Algebra</h4>
+                <p>10 questions • Due Friday</p>
+            </div>
+
+            <div class="actions">
+                <span class="badge yellow">Pending</span>
+                <button class="btn btn-primary" onclick="submitAssignment(this)">
+                    Submit
+                </button>
+            </div>
+
+        </div>
+
+        <div class="assignment">
+
+            <div class="assignment-info">
+                <h4>Physics — Motion</h4>
+                <p>Practical questions • Due Monday</p>
+            </div>
+
+            <div class="actions">
+                <span class="badge green">Submitted</span>
+                <button class="btn btn-light">View</button>
+            </div>
+
+        </div>
+
+        <div class="assignment">
+
+            <div class="assignment-info">
+                <h4>Biology — Cell Structure</h4>
+                <p>Short notes • Due Wednesday</p>
+            </div>
+
+            <div class="actions">
+                <span class="badge yellow">Pending</span>
+                <button class="btn btn-primary" onclick="submitAssignment(this)">
+                    Submit
+                </button>
+            </div>
+
+        </div>
+
+        <div class="assignment">
+
+            <div class="assignment-info">
+                <h4>English — Essay Writing</h4>
+                <p>Essay • Due Thursday</p>
+            </div>
+
+            <div class="actions">
+                <span class="badge green">Submitted</span>
+                <button class="btn btn-light">View</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= QUIZ ================= -->
+<section class="page" id="quiz">
+
+    <div class="card-header">
+        <div>
+            <h2>Practice Quiz</h2>
+            <p class="muted">Test your knowledge.</p>
+        </div>
+    </div>
+
+    <div class="card" id="quizBox">
+
+        <div class="quiz-question" id="questionText">
+            What is 5 × 6?
+        </div>
+
+        <div id="options"></div>
+
+        <button class="btn btn-primary" onclick="nextQuestion()">
+            Next Question
+        </button>
+
+        <p class="muted" style="margin-top:15px">
+            Question <span id="questionNumber">1</span> of 5
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESULTS ================= -->
+<section class="page" id="results">
+
+    <div class="card-header">
+        <div>
+            <h2>Results & Progress</h2>
+            <p class="muted">Track your academic performance.</p>
+        </div>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h2>78%</h2>
+            <p>Overall Average</p>
+        </div>
+
+        <div class="stat">
+            <h2>A</h2>
+            <p>Current Grade</p>
+        </div>
+
+        <div class="stat">
+            <h2>94%</h2>
+            <p>Attendance</p>
+        </div>
+
+        <div class="stat">
+            <h2>12</h2>
+            <p>Completed Topics</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Subject Performance</h3>
+        </div>
+
+        <div style="margin-bottom:18px">
+            <b>Mathematics</b>
+            <div class="progress" style="margin-top:7px">
+                <span style="width:82%"></span>
+            </div>
+            <small class="muted">82%</small>
+        </div>
+
+        <div style="margin-bottom:18px">
+            <b>Physics</b>
+            <div class="progress" style="margin-top:7px">
+                <span style="width:75%"></span>
+            </div>
+            <small class="muted">75%</small>
+        </div>
+
+        <div style="margin-bottom:18px">
+            <b>Chemistry</b>
+            <div class="progress" style="margin-top:7px">
+                <span style="width:79%"></span>
+            </div>
+            <small class="muted">79%</small>
+        </div>
+
+        <div style="margin-bottom:18px">
+            <b>Biology</b>
+            <div class="progress" style="margin-top:7px">
+                <span style="width:85%"></span>
+            </div>
+            <small class="muted">85%</small>
+        </div>
+
+        <div>
+            <b>English Language</b>
+            <div class="progress" style="margin-top:7px">
+                <span style="width:72%"></span>
+            </div>
+            <small class="muted">72%</small>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3 style="margin-bottom:15px">Recent Results</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Test</th>
+                        <th>Score</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Mathematics</td>
+                        <td>Algebra Test</td>
+                        <td>82/100</td>
+                        <td><span class="badge green">A</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Physics</td>
+                        <td>Motion Test</td>
+                        <td>75/100</td>
+                        <td><span class="badge green">B</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Biology</td>
+                        <td>Cell Test</td>
+                        <td>85/100</td>
+                        <td><span class="badge green">A</span></td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TIMETABLE ================= -->
+<section class="page" id="timetable">
+
+    <div class="card-header">
+        <div>
+            <h2>School Timetable</h2>
+            <p class="muted">Weekly class schedule.</p>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>8:00 - 9:00</td>
+                        <td>Mathematics</td>
+                        <td>Physics</td>
+                        <td>Biology</td>
+                        <td>English</td>
+                        <td>Chemistry</td>
+                    </tr>
+
+                    <tr>
+                        <td>9:00 - 10:00</td>
+                        <td>Physics</td>
+                        <td>Mathematics</td>
+                        <td>English</td>
+                        <td>Biology</td>
+                        <td>Computer</td>
+                    </tr>
+
+                    <tr>
+                        <td>10:30 - 11:30</td>
+                        <td>Chemistry</td>
+                        <td>Biology</td>
+                        <td>Mathematics</td>
+                        <td>Physics</td>
+                        <td>English</td>
+                    </tr>
+
+                    <tr>
+                        <td>11:30 - 12:30</td>
+                        <td>English</td>
+                        <td>Chemistry</td>
+                        <td>Physics</td>
+                        <td>Mathematics</td>
+                        <td>Biology</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ATTENDANCE ================= -->
+<section class="page" id="attendance">
+
+    <div class="card-header">
+        <div>
+            <h2>Attendance</h2>
+            <p class="muted">Your attendance record.</p>
+        </div>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h2>94%</h2>
+            <p>Attendance Rate</p>
+        </div>
+
+        <div class="stat">
+            <h2>47</h2>
+            <p>Present Days</p>
+        </div>
+
+        <div class="stat">
+            <h2>3</h2>
+            <p>Absent Days</p>
+        </div>
+
+        <div class="stat">
+            <h2>50</h2>
+            <p>Total School Days</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3 style="margin-bottom:15px">Attendance History</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>18 Sep 2026</td>
+                        <td><span class="badge green">Present</span></td>
+                        <td>On time</td>
+                    </tr>
+
+                    <tr>
+                        <td>17 Sep 2026</td>
+                        <td><span class="badge green">Present</span></td>
+                        <td>On time</td>
+                    </tr>
+
+                    <tr>
+                        <td>16 Sep 2026</td>
+                        <td><span class="badge red">Absent</span></td>
+                        <td>Excused</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ANNOUNCEMENTS ================= -->
+<section class="page" id="announcements">
+
+    <div class="card-header">
+        <div>
+            <h2>Announcements</h2>
+            <p class="muted">Latest school information.</p>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="assignment">
+            <div class="assignment-info">
+                <h4>📢 New Learning Materials</h4>
+                <p>
+                    New Mathematics and Physics materials have been added.
+                </p>
+            </div>
+            <span class="badge blue">New</span>
+        </div>
+
+        <div class="assignment">
+            <div class="assignment-info">
+                <h4>📝 Examination Preparation</h4>
+                <p>
+                    Students should complete all revision exercises.
+                </p>
+            </div>
+            <span class="badge yellow">Important</span>
+        </div>
+
+        <div class="assignment">
+            <div class="assignment-info">
+                <h4>🗓️ Timetable Update</h4>
+                <p>
+                    Check the timetable section for your weekly classes.
+                </p>
+            </div>
+            <span class="badge green">School</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TEACHER DASHBOARD ================= -->
+<section class="page" id="teacher">
+
+    <div class="welcome">
+
+        <h1>Teacher Dashboard 👨‍🏫</h1>
+
+        <p>
+            Manage classes, students, assignments and learning materials.
+        </p>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">👥</div>
+            <h2>120</h2>
+            <p>Total Students</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📚</div>
+            <h2>6</h2>
+            <p>Subjects</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📝</div>
+            <h2>24</h2>
+            <p>Assignments</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📊</div>
+            <h2>78%</h2>
+            <p>Class Average</p>
+        </div>
+
+    </div>
+
+    <div class="grid2">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Recent Submissions</h3>
+                <button class="btn btn-light">View All</button>
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Assignment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Student One</td>
+                            <td>Algebra</td>
+                            <td><span class="badge green">Submitted</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Student Two</td>
+                            <td>Physics</td>
+                            <td><span class="badge yellow">Pending</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Student Three</td>
+                            <td>Biology</td>
+                            <td><span class="badge green">Submitted</span></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Teacher Actions</h3>
+            </div>
+
+            <div class="quick-grid">
+
+                <div class="quick" onclick="showPage('manageContent')">
+                    ✏️
+                    <strong>Add Topic</strong>
+                    <small>Create lesson</small>
+                </div>
+
+                <div class="quick" onclick="showPage('manageContent')">
+                    📝
+                    <strong>Assignment</strong>
+                    <small>Create task</small>
+                </div>
+
+                <div class="quick" onclick="showPage('announcements')">
+                    📢
+                    <strong>Announcement</strong>
+                    <small>Notify students</small>
+                </div>
+
+                <div class="quick" onclick="showToast('Attendance manager opened')">
+                    ✅
+                    <strong>Attendance</strong>
+                    <small>Mark students</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MANAGE CONTENT ================= -->
+<section class="page" id="manageContent">
+
+    <div class="card-header">
+        <div>
+            <h2>Manage Learning Content</h2>
+            <p class="muted">Teacher content management area.</p>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Subject</label>
+                <select>
+                    <option>Mathematics</option>
+                    <option>Physics</option>
+                    <option>Chemistry</option>
+                    <option>Biology</option>
+                    <option>English Language</option>
+                    <option>Computer Science</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Topic Title</label>
+                <input id="newTopic" placeholder="Enter topic title">
+            </div>
+
+            <div class="form-group form-full">
+                <label>Explanation</label>
+                <textarea rows="6" placeholder="Write topic explanation here..."></textarea>
+            </div>
+
+            <div class="form-group form-full">
+                <label>Learning Objective</label>
+                <textarea rows="3" placeholder="What should students learn?"></textarea>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary" onclick="saveContent()">
+            Save Learning Content
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3 style="margin-bottom:15px">Create Assignment</h3>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Assignment Title</label>
+                <input placeholder="e.g. Algebra Exercise">
+            </div>
+
+            <div class="form-group">
+                <label>Subject</label>
+                <select>
+                    <option>Mathematics</option>
+                    <option>Physics</option>
+                    <option>Chemistry</option>
+                    <option>Biology</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Due Date</label>
+                <input type="date">
+            </div>
+
+            <div class="form-group">
+                <label>Maximum Score</label>
+                <input type="number" placeholder="100">
+            </div>
+
+            <div class="form-group form-full">
+                <label>Instructions</label>
+                <textarea rows="4"></textarea>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary" onclick="showToast('Assignment created successfully')">
+            Create Assignment
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+<section class="page" id="admin">
+
+    <div class="welcome">
+
+        <h1>Administrator Dashboard ⚙️</h1>
+
+        <p>Manage the entire school platform.</p>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">👨‍🎓</div>
+            <h2>850</h2>
+            <p>Students</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">👨‍🏫</div>
+            <h2>45</h2>
+            <p>Teachers</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">📚</div>
+            <h2>36</h2>
+            <p>Subjects</p>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🏫</div>
+            <h2>12</h2>
+            <p>Classes</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div>
+                <h3>System Management</h3>
+                <p class="muted">Manage major platform functions.</p>
+            </div>
+
+        </div>
+
+        <div class="quick-grid">
+
+            <div class="quick" onclick="showPage('students')">
+                👥
+                <strong>Manage Students</strong>
+                <small>Add and edit students</small>
+            </div>
+
+            <div class="quick" onclick="showToast('Teacher management opened')">
+                👨‍🏫
+                <strong>Teachers</strong>
+                <small>Manage teachers</small>
+            </div>
+
+            <div class="quick" onclick="showPage('subjects')">
+                📚
+                <strong>Subjects</strong>
+                <small>Manage subjects</small>
+            </div>
+
+            <div class="quick" onclick="showToast('System settings opened')">
+                ⚙️
+                <strong>Settings</strong>
+                <small>System configuration</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STUDENTS ================= -->
+<section class="page" id="students">
+
+    <div class="card-header">
+
+        <div>
+            <h2>Student Management</h2>
+            <p class="muted">Manage registered students.</p>
+        </div>
+
+        <button class="btn btn-primary" onclick="openModal()">
+            + Add Student
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="studentTable">
+
+                    <tr>
+                        <td>ST001</td>
+                        <td>Student One</td>
+                        <td>SS2</td>
+                        <td>Male</td>
+                        <td><span class="badge green">Active</span></td>
+                        <td><button class="btn btn-light">Edit</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>ST002</td>
+                        <td>Student Two</td>
+                        <td>SS1</td>
+                        <td>Female</td>
+                        <td><span class="badge green">Active</span></td>
+                        <td><button class="btn btn-light">Edit</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>ST003</td>
+                        <td>Student Three</td>
+                        <td>SS3</td>
+                        <td>Male</td>
+                        <td><span class="badge green">Active</span></td>
+                        <td><button class="btn btn-light">Edit</button></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    </div>
+
+</main>
+
+</div>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+<div class="modal" id="studentModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3>Add New Student</h3>
+
+            <button class="close" onclick="closeModal()">×</button>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Student ID</label>
+                <input id="studentId" placeholder="ST004">
+            </div>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input id="studentName" placeholder="Student name">
+            </div>
+
+            <div class="form-group">
+                <label>Class</label>
+                <select id="studentClass">
+                    <option>JSS1</option>
+                    <option>JSS2</option>
+                    <option>JSS3</option>
+                    <option>SS1</option>
+                    <option>SS2</option>
+                    <option>SS3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="studentGender">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary" onclick="addStudent()">
+            Save Student
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   FCSS STUDENT PLATFORM
+   FRONTEND DEMO
+========================================================= */
+
+
+/* ---------- LOGIN DATA ---------- */
+
+const accounts = {
+
+    ST001:{
+        password:"1234",
+        role:"student",
+        name:"Student One"
+    },
+
+    TC001:{
+        password:"1234",
+        role:"teacher",
+        name:"Teacher One"
+    },
+
+    AD001:{
+        password:"1234",
+        role:"admin",
+        name:"Administrator"
+    }
+
+};
+
+
+/* ---------- SUBJECT DATA ---------- */
+
+const subjects = [
+
+    {
+        name:"Mathematics",
+        icon:"➗",
+        description:"Numbers, algebra, geometry and problem solving.",
+        topics:[
+            {
+                title:"Algebra & Equations",
+                explanation:"Algebra is a branch of mathematics that uses letters and symbols to represent numbers. An equation states that two expressions are equal.",
+                points:[
+                    "Identify variables and constants.",
+                    "Simplify algebraic expressions.",
+                    "Solve simple linear equations.",
+                    "Check your answer by substitution."
+                ],
+                example:"If 2x + 4 = 10, subtract 4 from both sides: 2x = 6. Divide by 2: x = 3."
+            },
+            {
+                title:"Quadratic Equations",
+                explanation:"A quadratic equation is an equation in which the highest power of the variable is 2.",
+                points:[
+                    "Understand ax² + bx + c = 0.",
+                    "Factor simple quadratic expressions.",
+                    "Use the quadratic formula.",
+                    "Interpret solutions."
+                ],
+                example:"x² - 5x + 6 = 0 can be factorised as (x - 2)(x - 3) = 0."
+            },
+            {
+                title:"Geometry",
+                explanation:"Geometry deals with shapes, sizes, positions and properties of figures.",
+                points:[
+                    "Angles",
+                    "Triangles",
+                    "Circles",
+                    "Perimeter and area"
+                ],
+                example:"The area of a rectangle is length × width."
+            }
+        ]
+    },
+
+    {
+        name:"Physics",
+        icon:"⚛️",
+        description:"Motion, forces, energy, waves and electricity.",
+        topics:[
+            {
+                title:"Motion",
+                explanation:"Motion describes a change in position of an object with time.",
+                points:[
+                    "Distance",
+                    "Displacement",
+                    "Speed",
+                    "Velocity",
+                    "Acceleration"
+                ],
+                example:"Speed = Distance ÷ Time."
+            },
+            {
+                title:"Forces",
+                explanation:"A force is a push or pull that can change the motion or shape of an object.",
+                points:[
+                    "Force is measured in Newtons.",
+                    "Forces can be balanced or unbalanced.",
+                    "Gravity is an attractive force.",
+                    "Friction opposes motion."
+                ],
+                example:"Newton's second law is F = ma."
+            },
+            {
+                title:"Electricity",
+                explanation:"Electricity involves the movement and effects of electric charge.",
+                points:[
+                    "Current",
+                    "Voltage",
+                    "Resistance",
+                    "Simple circuits"
+                ],
+                example:"Ohm's law: V = IR."
+            }
+        ]
+    },
+
+    {
+        name:"Chemistry",
+        icon:"🧪",
+        description:"Matter, atoms, reactions and chemical processes.",
+        topics:[
+            {
+                title:"Atoms & Elements",
+                explanation:"An atom is the basic unit of an element. Atoms contain protons, neutrons and electrons.",
+                points:[
+                    "Protons have positive charge.",
+                    "Electrons have negative charge.",
+                    "Neutrons have no electrical charge.",
+                    "Elements are identified by atomic number."
+                ],
+                example:"Carbon has atomic number 6, meaning it has 6 protons."
+            },
+            {
+                title:"Chemical Reactions",
+                explanation:"A chemical reaction occurs when substances are transformed into new substances.",
+                points:[
+                    "Reactants",
+                    "Products",
+                    "Chemical equations",
+                    "Conservation of mass"
+                ],
+                example:"Hydrogen reacts with oxygen to form water."
+            },
+            {
+                title:"Acids & Bases",
+                explanation:"Acids and bases are important groups of chemical substances with different properties.",
+                points:[
+                    "pH scale",
+                    "Indicators",
+                    "Neutralisation",
+                    "Strong and weak acids"
+                ],
+                example:"An acid and a base can react in a neutralisation reaction."
+            }
+        ]
+    },
+
+    {
+        name:"Biology",
+        icon:"🧬",
+        description:"Living organisms, cells, ecology and human biology.",
+        topics:[
+            {
+                title:"Cell Structure",
+                explanation:"The cell is the basic structural and functional unit of living organisms.",
+                points:[
+                    "Cell membrane",
+                    "Cytoplasm",
+                    "Nucleus",
+                    "Mitochondria",
+                    "Plant cell structures"
+                ],
+                example:"The nucleus contains genetic material and controls many cell activities."
+            },
+            {
+                title:"Human Nutrition",
+                explanation:"Nutrition is the process by which organisms obtain and use nutrients.",
+                points:[
+                    "Carbohydrates",
+                    "Proteins",
+                    "Fats",
+                    "Vitamins",
+                    "Minerals"
+                ],
+                example:"Carbohydrates are an important source of energy."
+            },
+            {
+                title:"Ecology",
+                explanation:"Ecology is the study of relationships between organisms and their environment.",
+                points:[
+                    "Food chains",
+                    "Food webs",
+                    "Population",
+                    "Community",
+                    "Ecosystem"
+                ],
+                example:"Grass → grasshopper → frog → snake is an example of a food chain."
+            }
+        ]
+    },
+
+    {
+        name:"English Language",
+        icon:"🔤",
+        description:"Grammar, comprehension, vocabulary and writing.",
+        topics:[
+            {
+                title:"Grammar",
+                explanation:"Grammar is the system of rules used to construct meaningful sentences.",
+                points:[
+                    "Parts of speech",
+                    "Tenses",
+                    "Subject and predicate",
+                    "Sentence structure"
+                ],
+                example:"She writes a letter. The word 'writes' is a verb."
+            },
+            {
+                title:"Essay Writing",
+                explanation:"An essay is a structured piece of writing developed around a topic or argument.",
+                points:[
+                    "Introduction",
+                    "Body paragraphs",
+                    "Conclusion",
+                    "Correct grammar",
+                    "Clear ideas"
+                ],
+                example:"A good introduction should clearly introduce the topic."
+            },
+            {
+                title:"Comprehension",
+                explanation:"Comprehension involves reading a passage and understanding its meaning.",
+                points:[
+                    "Read carefully.",
+                    "Identify the main idea.",
+                    "Look for supporting details.",
+                    "Answer using evidence from the passage."
+                ],
+                example:"Underline important information while reading."
+            }
+        ]
+    },
+
+    {
+        name:"Computer Science",
+        icon:"💻",
+        description:"Programming, computers, internet and digital skills.",
+        topics:[
+            {
+                title:"Introduction to Programming",
+                explanation:"Programming is the process of writing instructions that computers can execute.",
+                points:[
+                    "Variables",
+                    "Data types",
+                    "Conditions",
+                    "Loops",
+                    "Functions"
+                ],
+                example:"A variable can store information such as a student's name or score."
+            },
+            {
+                title:"HTML & CSS",
+                explanation:"HTML structures web pages while CSS controls their visual presentation.",
+                points:[
+                    "HTML elements",
+                    "Attributes",
+                    "CSS selectors",
+                    "Layouts",
+                    "Responsive design"
+                ],
+                example:"HTML creates a button while CSS can control its size and appearance."
+            },
+            {
+                title:"Internet & Networking",
+                explanation:"Computer networks allow devices to communicate and share information.",
+                points:[
+                    "Internet",
+                    "Websites",
+                    "Servers",
+                    "IP addresses",
+                    "Network security"
+                ],
+                example:"A browser requests web resources from a server."
+            }
+        ]
+    }
+
+];
+
+
+/* ---------- BOOK DATA ---------- */
+
+const books = [
+
+    {
+        title:"Mathematics Complete Guide",
+        subject:"Mathematics",
+        description:"Algebra, geometry, statistics and revision exercises."
+    },
+
+    {
+        title:"Essential Physics",
+        subject:"Physics",
+        description:"Motion, forces, electricity, waves and practical work."
+    },
+
+    {
+        title:"Senior Chemistry",
+        subject:"Chemistry",
+        description:"Atoms, bonding, reactions and laboratory concepts."
+    },
+
+    {
+        title:"Modern Biology",
+        subject:"Biology",
+        description:"Cells, genetics, ecology and human biology."
+    },
+
+    {
+        title:"English Language Skills",
+        subject:"English",
+        description:"Grammar, comprehension and effective writing."
+    },
+
+    {
+        title:"Computer Science Basics",
+        subject:"Computer",
+        description:"Programming and digital technology fundamentals."
+    }
+
+];
+
+
+/* ---------- QUIZ DATA ---------- */
+
+const quizQuestions = [
+
+    {
+        q:"What is 5 × 6?",
+        options:["20","25","30","35"],
+        answer:2
+    },
+
+    {
+        q:"What is the SI unit of force?",
+        options:["Joule","Newton","Watt","Volt"],
+        answer:1
+    },
+
+    {
+        q:"Which organelle controls many cell activities?",
+        options:["Nucleus","Ribosome","Cell wall","Vacuole"],
+        answer:0
+    },
+
+    {
+        q:"What does HTML mainly provide?",
+        options:[
+            "Web page structure",
+            "Electric current",
+            "Database storage only",
+            "Computer hardware"
+        ],
+        answer:0
+    },
+
+    {
+        q:"What is V = IR known as?",
+        options:[
+            "Newton's law",
+            "Ohm's law",
+            "Boyle's law",
+            "Hooke's law"
+        ],
+        answer:1
+    }
+
+];
+
+let quizIndex = 0;
+let selectedAnswer = null;
+
+
+/* ---------- LOGIN ---------- */
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const id =
+        document.getElementById("loginId").value.trim().toUpperCase();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    const role =
+        document.getElementById("loginRole").value;
+
+    const account = accounts[id];
+
+    if(
+        account &&
+        account.password === password &&
+        account.role === role
+    ){
+
+        localStorage.setItem("fcssUser",JSON.stringify({
+            id:id,
+            name:account.name,
+            role:account.role
+        }));
+
+        loadApp(account.name,account.role);
+
+    }else{
+
+        alert(
+            "Login failed.\n\nUse:\nST001 / 1234\nTC001 / 1234\nAD001 / 1234"
+        );
+
+    }
+
+});
+
+
+/* ---------- LOAD APP ---------- */
+
+function loadApp(name,role){
+
+    document.getElementById("loginPage").style.display="none";
+
+    document.getElementById("app").style.display="block";
+
+    document.getElementById("userName").textContent=name;
+    document.getElementById("welcomeName").textContent=name;
+
+    document.getElementById("avatar").textContent =
+        name.charAt(0).toUpperCase();
+
+    document.getElementById("userRole").textContent =
+        role.charAt(0).toUpperCase()+role.slice(1);
+
+    document.getElementById("roleText").textContent =
+        role.charAt(0).toUpperCase()+role.slice(1)+" Portal";
+
+    document.getElementById("teacherNav").style.display =
+        role==="teacher" || role==="admin" ? "block":"none";
+
+    document.getElementById("adminNav").style.display =
+        role==="admin" ? "block":"none";
+
+    showPage("dashboard");
+
+}
+
+
+/* ---------- AUTO LOGIN ---------- */
+
+window.addEventListener("load",function(){
+
+    const saved = localStorage.getItem("fcssUser");
+
+    if(saved){
+
+        const user = JSON.parse(saved);
+
+        loadApp(user.name,user.role);
+
+    }
+
+    renderSubjects();
+    renderBooks();
+    renderQuiz();
+
+});
+
+
+/* ---------- NAVIGATION ---------- */
+
+document.querySelectorAll(".nav button[data-page]").forEach(button=>{
+
+    button.addEventListener("click",function(){
+
+        showPage(this.dataset.page);
+
+        document.getElementById("sidebar").classList.remove("open");
+
+    });
+
+});
+
+
+function showPage(pageId){
+
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    const page = document.getElementById(pageId);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav button[data-page]").forEach(btn=>{
+        btn.classList.toggle(
+            "active",
+            btn.dataset.page===pageId
+        );
+    });
+
+    const titles = {
+
+        dashboard:"Dashboard",
+        subjects:"Subjects & Topics",
+        topic:"Topic Explanation",
+        textbooks:"Textbooks",
+        assignments:"Assignments",
+        quiz:"Practice Quiz",
+        results:"Results & Progress",
+        timetable:"Timetable",
+        attendance:"Attendance",
+        announcements:"Announcements",
+        teacher:"Teacher Dashboard",
+        manageContent:"Manage Content",
+        admin:"Admin Dashboard",
+        students:"Students"
+
+    };
+
+    document.getElementById("pageTitle").textContent =
+        titles[pageId] || "FCSS Platform";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ---------- SUBJECTS ---------- */
+
+function renderSubjects(){
+
+    const container =
+        document.getElementById("subjectContainer");
+
+    container.innerHTML="";
+
+    subjects.forEach((subject,index)=>{
+
+        const div = document.createElement("div");
+
+        div.className="subject";
+
+        let topicsHTML="";
+
+        subject.topics.forEach((topic,tIndex)=>{
+
+            topicsHTML += `
+                <li onclick="openTopic(${index},${tIndex})">
+                    ${tIndex+1}. ${topic.title}
+                </li>
+            `;
+
+        });
+
+        div.innerHTML=`
+
+            <div class="subject-top">
+                ${subject.icon}
+            </div>
+
+            <div class="subject-body">
+
+                <h3>${subject.name}</h3>
+
+                <p class="muted">
+                    ${subject.description}
+                </p>
+
+                <ul class="topic-list">
+                    ${topicsHTML}
+                </ul>
+
+            </div>
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* ---------- TOPIC ---------- */
+
+function openTopic(subjectIndex,topicIndex){
+
+    const subject=subjects[subjectIndex];
+
+    const topic=subject.topics[topicIndex];
+
+    document.getElementById("topicContent").innerHTML=`
+
+        <div style="font-size:40px;margin-bottom:10px">
+            ${subject.icon}
+        </div>
+
+        <h2>${topic.title}</h2>
+
+        <p class="muted">
+            Subject: ${subject.name}
+        </p>
+
+        <h3>Explanation</h3>
+
+        <p>
+            ${topic.explanation}
+        </p>
+
+        <h3>Learning Points</h3>
+
+        <ul>
+            ${topic.points.map(point=>`<li>${point}</li>`).join("")}
+        </ul>
+
+        <h3>Example</h3>
+
+        <div class="example">
+            ${topic.example}
+        </div>
+
+        <div style="margin-top:25px">
+
+            <button
+                class="btn btn-primary"
+                onclick="showToast('Topic marked as completed')"
+            >
+                ✓ Mark as Completed
+            </button>
+
+            <button
+                class="btn btn-light"
+                onclick="showPage('quiz')"
+            >
+                🧠 Practice Quiz
+            </button>
+
+        </div>
+
+    `;
+
+    showPage("topic");
+
+}
+
+
+/* ---------- BOOKS ---------- */
+
+function renderBooks(){
+
+    const container =
+        document.getElementById("bookContainer");
+
+    container.innerHTML="";
+
+    books.forEach(book=>{
+
+        const div=document.createElement("div");
+
+        div.className="book";
+
+        div.innerHTML=`
+
+            <div class="book-cover">
+                📖<br>
+                ${book.title}
+            </div>
+
+            <h3>${book.title}</h3>
+
+            <p>
+                ${book.description}
+            </p>
+
+            <span class="badge blue">
+                ${book.subject}
+            </span>
+
+            <br><br>
+
+            <button
+                class="btn btn-primary"
+                onclick="openBook('${book.title}')"
+            >
+                Read Book
+            </button>
+
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+function openBook(title){
+
+    showToast("Opening: "+title);
+
+}
+
+
+/* ---------- QUIZ ---------- */
+
+function renderQuiz(){
+
+    const question =
+        quizQuestions[quizIndex];
+
+    document.getElementById("questionText").textContent =
+        question.q;
+
+    document.getElementById("questionNumber").textContent =
+        quizIndex+1;
+
+    const options =
+        document.getElementById("options");
+
+    options.innerHTML="";
+
+    selectedAnswer=null;
+
+    question.options.forEach((option,index)=>{
+
+        const div=document.createElement("div");
+
+        div.className="option";
+
+        div.textContent=option;
+
+        div.onclick=function(){
+
+            document
+                .querySelectorAll(".option")
+                .forEach(item=>{
+                    item.classList.remove("selected");
+                });
+
+            div.classList.add("selected");
+
+            selectedAnswer=index;
+
+        };
+
+        options.appendChild(div);
+
+    });
+
+}
+
+
+function nextQuestion(){
+
+    if(selectedAnswer===null){
+
+        showToast("Please select an answer");
+
+        return;
+
+    }
+
+    const current =
+        quizQuestions[quizIndex];
+
+    if(selectedAnswer===current.answer){
+
+        showToast("Correct answer! 🎉");
+
+    }else{
+
+        showToast(
+            "Not correct. Keep studying and try again."
+        );
+
+    }
+
+    quizIndex++;
+
+    if(quizIndex>=quizQuestions.length){
+
+        quizIndex=0;
+
+        setTimeout(()=>{
+            showToast("Quiz completed!");
+        },500);
+
+    }
+
+    renderQuiz();
+
+}
+
+
+/* ---------- ASSIGNMENT ---------- */
+
+function submitAssignment(button){
+
+    button.parentElement
+        .querySelector(".badge")
+        .className="badge green";
+
+    button.parentElement
+        .querySelector(".badge")
+        .textContent="Submitted";
+
+    button.remove();
+
+    showToast("Assignment submitted successfully");
+
+}
+
+
+/* ---------- TEACHER CONTENT ---------- */
+
+function saveContent(){
+
+    const topic =
+        document.getElementById("newTopic").value.trim();
+
+    if(!topic){
+
+        showToast("Enter a topic title first");
+
+        return;
+
+    }
+
+    let saved =
+        JSON.parse(
+            localStorage.getItem("fcssTopics") || "[]"
+        );
+
+    saved.push({
+        title:topic,
+        date:new Date().toLocaleDateString()
+    });
+
+    localStorage.setItem(
+        "fcssTopics",
+        JSON.stringify(saved)
+    );
+
+    document.getElementById("newTopic").value="";
+
+    showToast("Learning content saved successfully");
+
+}
+
+
+/* ---------- ADMIN STUDENTS ---------- */
+
+function openModal(){
+
+    document
+        .getElementById("studentModal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("studentModal")
+        .classList.remove("show");
+
+}
+
+
+function addStudent(){
+
+    const id =
+        document.getElementById("studentId").value.trim();
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const studentClass =
+        document.getElementById("studentClass").value;
+
+    const gender =
+        document.getElementById("studentGender").value;
+
+    if(!id || !name){
+
+        showToast("Please enter student ID and name");
+
+        return;
+
+    }
+
+    const table =
+        document.getElementById("studentTable");
+
+    const row =
+        document.createElement("tr");
+
+    row.innerHTML=`
+
+        <td>${id}</td>
+
+        <td>${name}</td>
+
+        <td>${studentClass}</td>
+
+        <td>${gender}</td>
+
+        <td>
+            <span class="badge green">
+                Active
+            </span>
+        </td>
+
+        <td>
+            <button class="btn btn-light">
+                Edit
+            </button>
+        </td>
+
+    `;
+
+    table.appendChild(row);
+
+    closeModal();
+
+    showToast("Student added successfully");
+
+}
+
+
+/* ---------- DARK MODE ---------- */
+
+document.getElementById("themeBtn").addEventListener(
+    "click",
+    function(){
+
+        document.body.classList.toggle("dark");
+
+        const dark =
+            document.body.classList.contains("dark");
+
+        localStorage.setItem(
+            "fcssDarkMode",
+            dark ? "1":"0"
+        );
+
+        this.textContent =
+            dark ? "☀️":"🌙";
+
+    }
+);
+
+
+if(localStorage.getItem("fcssDarkMode")==="1"){
+
+    document.body.classList.add("dark");
+
+    document.getElementById("themeBtn").textContent="☀️";
+
+}
+
+
+/* ---------- MOBILE MENU ---------- */
+
+document.getElementById("menuBtn").addEventListener(
+    "click",
+    function(){
+
+        document
+            .getElementById("sidebar")
+            .classList.toggle("open");
+
+    }
+);
+
+
+/* ---------- LOGOUT ---------- */
+
+document.getElementById("logoutBtn").addEventListener(
+    "click",
+    function(){
+
+        localStorage.removeItem("fcssUser");
+
+        document.getElementById("app").style.display="none";
+
+        document.getElementById("loginPage").style.display="flex";
+
+        document.getElementById("loginForm").reset();
+
+        showToast("Logged out successfully");
+
+    }
+);
+
+
+/* ---------- TOAST ---------- */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* ---------- CLOSE MODAL WHEN CLICKING OUTSIDE ---------- */
+
+document.getElementById("studentModal").addEventListener(
+    "click",
+    function(e){
+
+        if(e.target===this){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
